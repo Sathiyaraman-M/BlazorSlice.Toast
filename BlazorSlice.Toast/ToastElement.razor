@@ -1,0 +1,24 @@
+﻿@Css
+<div @attributes="@UserAttributes" class="@ToastClass" style="@AnimationStyle" @onclick="@ToastClicked">
+    <div class="toast-header">
+        @if(!HideIcon)
+        {
+            <ArcIcon Icon="@Icon" Color="@IconColor" Size="@IconSize" />
+        }
+        <strong class="ms-2 me-auto">@Message?.ComponentParameters["Title"]</strong>
+        @if (ShowCloseIcon)
+        {
+            <ArcButton Size="Size.Small" Class="btn-close" Color="Color.None" OnClick="@CloseIconClicked" />
+        }
+    </div>
+    <div class="toast-body">
+        @if (Message?.ComponentType != null)
+        {
+            <DynamicComponent Type="Message.ComponentType" Parameters="Message.ComponentParameters" />
+        }
+        @if (ShowActionButton)
+        {
+            <ArcButton Variant="@ActionVariant" Color="@ActionColor" OnClick="@ActionClicked" Class="ms-auto">@Action</ArcButton>
+        }
+    </div>
+</div>
