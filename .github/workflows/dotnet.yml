@@ -39,7 +39,6 @@ jobs:
       run: dotnet build BlazorSlice.Toast/BlazorSlice.Toast.csproj --configuration Release
       
     - name: Pack with dotnet
-      run: dotnet pack BlazorSlice.Toast/BlazorSlice.Toast.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}
-    
+      run: dotnet pack BlazorSlice.Toast/BlazorSlice.Toast.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}    
     - name: Publish
       run: dotnet nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
