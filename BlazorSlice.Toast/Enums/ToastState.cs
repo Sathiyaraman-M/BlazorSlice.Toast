@@ -1,4 +1,4 @@
-﻿namespace BlazorSlice.Toast.Enums;
+﻿namespace BlazorSlice.Toast;
 
 internal enum ToastState
 {

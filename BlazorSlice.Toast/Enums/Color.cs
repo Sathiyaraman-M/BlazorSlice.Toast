@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace BlazorSlice.Toast.Enums;
+namespace BlazorSlice.Toast;
 
 public enum Color : byte
 {
