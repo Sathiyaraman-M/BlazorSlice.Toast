@@ -18,13 +18,13 @@ jobs:
       run: git fetch --prune --unshallow
       
     - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9
+      uses: gittools/actions/gitversion/setup@v0.9.4
       with:
           versionSpec: '5.1.x'
           
     - name: Use GitVersion
       id: gitversion # step id used as reference for output values
-      uses: gittools/actions/gitversion/execute@v0.9
+      uses: gittools/actions/gitversion/execute@v0.9.4
       
     - run: |
         echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
@@ -36,7 +36,7 @@ jobs:
         dotnet-version: 7.0.x
 
     - name: Build
-      run: dotnet build BlazorSlice.Toast/BlazorSlice.Toast.csproj --configuration $BUILD_CONFIG --no-restore
+      run: dotnet build BlazorSlice.Toast/BlazorSlice.Toast.csproj --configuration Release
       
     - name: Pack with dotnet
       run: dotnet pack BlazorSlice.Toast/BlazorSlice.Toast.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}
