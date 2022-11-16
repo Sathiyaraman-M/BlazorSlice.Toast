@@ -3,12 +3,12 @@
     <div class="toast-header">
         @if(!HideIcon)
         {
-            <ArcIcon Icon="@Icon" Color="@IconColor" Size="@IconSize" />
+            <BSIcon Icon="@Icon" Color="@IconColor" Size="@IconSize" />
         }
         <strong class="ms-2 me-auto">@Message?.ComponentParameters["Title"]</strong>
         @if (ShowCloseIcon)
         {
-            <ArcButton Size="Size.Small" Class="btn-close" Color="Color.None" OnClick="@CloseIconClicked" />
+            <button class="btn btn-sm btn-close" type="button" @onclick="@CloseIconClicked"></button>
         }
     </div>
     <div class="toast-body">
@@ -18,7 +18,7 @@
         }
         @if (ShowActionButton)
         {
-            <ArcButton Variant="@ActionVariant" Color="@ActionColor" OnClick="@ActionClicked" Class="ms-auto">@Action</ArcButton>
+            <button class="@($"btn btn-{ActionVariant.ToDescriptionString()} btn-{ActionColor.ToDescriptionString()} ms-auto")" @onclick="@ActionClicked">@Action</button>
         }
     </div>
 </div>

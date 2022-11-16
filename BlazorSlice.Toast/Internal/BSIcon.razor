@@ -1,0 +1,59 @@
+﻿@if (!string.IsNullOrEmpty(Icon) && Icon.Trim().StartsWith("<"))
+{
+    <svg xmlns="http://www.w3.org/2000/svg" @attributes="UserAttributes" width="24" height="24" focusable="false" 
+         class="@ClassName" style="@Style" viewBox="@ViewBox" stroke-width="2" stroke="currentColor" fill="none" 
+         stroke-linecap="round" stroke-linejoin="round">
+        @if (Title != null)
+        {
+            <title>@Title</title>
+        }
+        @((MarkupString)Icon)
+    </svg>
+}
+else
+{
+    <span @attributes="@UserAttributes" class="@($"{ClassName} {Icon}")" style="@Style" title="@Title"></span>
+}
+
+@code {
+    private string ClassName => new CssBuilder()
+        .AddClass("icon")
+        .AddClass("icon-sm", Size == Size.Small)
+        .AddClass("icon-lg", Size == Size.Large)
+        .AddClass($"text-{Color.ToDescriptionString()}")
+        .AddClass(Class)
+        .Build();
+
+    private string ColorName => new CssBuilder()
+        .Build();
+    
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> UserAttributes { get; set; } = new();
+    
+    [Parameter]
+    public string Class { get; set; }
+    
+    [Parameter]
+    public string Style { get; set; }
+    
+    [Parameter]
+    public string Icon { get; set; }
+
+    [Parameter]
+    public string Title { get; set; }
+
+    [Parameter] 
+    public decimal StrokeWidth { get; set; } = 2;
+
+    [Parameter]
+    public Size Size { get; set; } = Size.Default;
+
+    [Parameter]
+    public Color Color { get; set; } = Color.Light;
+
+    [Parameter]
+    public string ViewBox { get; set; } = "0 0 24 24";
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}
